@@ -1,0 +1,36 @@
+/*
+==================================================
+Problem      : Set the Rightmost Unset Bit
+Platform     : GeeksforGeeks
+
+Difficulty   : Easy
+
+Pattern      : Bit Manipulation
+
+Approach     : x | (x + 1)
+
+Time          : O(1)
+Space         : O(1)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int setBit(int n) {
+
+        if((n & (n + 1)) == 0)
+            return n;
+
+        return n | (n + 1);
+    }
+};
+
+int main() {
+    return 0;
+}
