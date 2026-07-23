@@ -1,0 +1,53 @@
+/*
+==================================================
+Problem      : Two Numbers with Odd Occurrences
+Platform     : GeeksforGeeks
+
+Difficulty   : Medium
+
+Pattern      : XOR
+
+Approach     : Rightmost Set Bit Partition
+
+Time          : O(n)
+Space         : O(1)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<long long int> twoOddNum(long long int Arr[], long long int N) {
+
+        long long xr = 0;
+
+        for(int i = 0; i < N; i++)
+            xr ^= Arr[i];
+
+        long long bit = xr & (-xr);
+
+        long long a = 0, b = 0;
+
+        for(int i = 0; i < N; i++){
+
+            if(Arr[i] & bit)
+                a ^= Arr[i];
+            else
+                b ^= Arr[i];
+        }
+
+        if(a < b)
+            swap(a, b);
+
+        return {a, b};
+    }
+};
+
+int main() {
+    return 0;
+}
