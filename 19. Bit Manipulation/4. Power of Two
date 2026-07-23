@@ -1,0 +1,36 @@
+/*
+==================================================
+Problem      : Power of Two
+Platform     : LeetCode 231
+
+Difficulty   : Easy
+
+Pattern      : Bit Manipulation
+
+Approach     : n & (n-1)
+
+Time          : O(1)
+Space         : O(1)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+
+        if(n <= 0)
+            return false;
+
+        return (n & (n - 1)) == 0;
+    }
+};
+
+int main() {
+    return 0;
+}
