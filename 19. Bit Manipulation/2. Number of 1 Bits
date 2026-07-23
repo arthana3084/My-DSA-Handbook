@@ -1,0 +1,40 @@
+/*
+==================================================
+Problem      : Number of 1 Bits
+Platform     : LeetCode 191
+
+Difficulty   : Easy
+
+Pattern      : Bit Manipulation
+
+Approach     : Brian Kernighan Algorithm
+
+Time          : O(Number of Set Bits)
+Space         : O(1)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+
+        int cnt = 0;
+
+        while(n){
+            n &= (n - 1);
+            cnt++;
+        }
+
+        return cnt;
+    }
+};
+
+int main() {
+    return 0;
+}
