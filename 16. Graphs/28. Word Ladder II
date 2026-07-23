@@ -1,0 +1,93 @@
+/*
+==================================================
+Problem      : Word Ladder II
+Platform     : LeetCode 126
+
+Difficulty   : Hard
+
+Pattern      : BFS + Backtracking
+
+Approach     : BFS to generate shortest paths
+
+Time          : O(N * L * 26)
+Space         : O(N)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+
+    vector<vector<string>> findLadders(string beginWord,
+                                       string endWord,
+                                       vector<string>& wordList) {
+
+        unordered_set<string> st(wordList.begin(), wordList.end());
+
+        queue<vector<string>> q;
+        q.push({beginWord});
+
+        vector<vector<string>> ans;
+        vector<string> used;
+
+        int level = 1;
+
+        while(!q.empty()){
+
+            vector<string> path = q.front();
+            q.pop();
+
+            if(path.size() > level){
+
+                level = path.size();
+
+                for(auto &w : used)
+                    st.erase(w);
+
+                used.clear();
+            }
+
+            string word = path.back();
+
+            if(word == endWord){
+
+                if(ans.empty())
+                    ans.push_back(path);
+
+                else if(ans[0].size() == path.size())
+                    ans.push_back(path);
+            }
+
+            for(int i = 0; i < word.size(); i++){
+
+                char org = word[i];
+
+                for(char ch = 'a'; ch <= 'z'; ch++){
+
+                    word[i] = ch;
+
+                    if(st.count(word)){
+
+                        path.push_back(word);
+                        q.push(path);
+                        used.push_back(word);
+                        path.pop_back();
+                    }
+                }
+
+                word[i] = org;
+            }
+        }
+
+        return ans;
+    }
+};
+
+int main(){
+    return 0;
+}
