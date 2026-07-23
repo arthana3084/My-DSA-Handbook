@@ -1,0 +1,64 @@
+/*
+==================================================
+Problem      : Cycle Detection in Undirected Graph
+Platform     : GeeksforGeeks
+
+Difficulty   : Medium
+
+Pattern      : DFS
+
+Approach     : DFS with Parent Tracking
+
+Time          : O(V + E)
+Space         : O(V)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+
+    bool dfs(int node,int parent,
+             vector<vector<int>>& adj,
+             vector<bool>& vis){
+
+        vis[node]=true;
+
+        for(int it:adj[node]){
+
+            if(!vis[it]){
+
+                if(dfs(it,node,adj,vis))
+                    return true;
+            }
+            else if(it!=parent){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool isCycle(vector<vector<int>>& adj){
+
+        int V=adj.size();
+        vector<bool> vis(V,false);
+
+        for(int i=0;i<V;i++){
+
+            if(!vis[i] && dfs(i,-1,adj,vis))
+                return true;
+        }
+
+        return false;
+    }
+};
+
+int main(){
+    return 0;
+}
