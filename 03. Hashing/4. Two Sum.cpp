@@ -1,0 +1,49 @@
+/*
+==================================================
+Problem      : Two Sum
+Platform     : LeetCode 1
+
+Difficulty   : Easy
+
+Pattern      : Hashing
+
+Time          : O(n)
+Space         : O(n)
+
+Key Idea
+---------
+Store previously seen numbers.
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> twoSum(vector<int>& nums,int target)
+{
+    unordered_map<int,int> mp;
+
+    for(int i=0;i<nums.size();i++)
+    {
+        int need=target-nums[i];
+
+        if(mp.count(need))
+            return {mp[need],i};
+
+        mp[nums[i]]=i;
+    }
+
+    return {};
+}
+
+int main()
+{
+    vector<int> nums={2,7,11,15};
+
+    auto ans=twoSum(nums,9);
+
+    cout<<ans[0]<<" "<<ans[1];
+}
