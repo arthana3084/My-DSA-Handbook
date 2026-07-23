@@ -1,0 +1,53 @@
+/*
+==================================================
+Problem      : Coordinate Compression
+
+Platform     : General DSA
+
+Difficulty   : Medium
+
+Pattern      : Sorting
+
+Approach     :
+Store unique values in sorted order.
+Replace every element with its index
+in the sorted unique array.
+
+Time          : O(N log N)
+Space         : O(N)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution{
+public:
+
+    vector<int> compress(vector<int>& nums){
+
+        vector<int> temp=nums;
+
+        sort(temp.begin(),temp.end());
+
+        temp.erase(unique(temp.begin(),temp.end()),temp.end());
+
+        vector<int> ans;
+
+        for(int x:nums){
+
+            ans.push_back(lower_bound(temp.begin(),
+                                      temp.end(),
+                                      x)-temp.begin());
+        }
+
+        return ans;
+    }
+};
+
+int main(){
+    return 0;
+}
