@@ -1,0 +1,66 @@
+/*
+==================================================
+Problem      : Topological Sort (Kahn's Algorithm)
+Platform     : GeeksforGeeks
+
+Difficulty   : Medium
+
+Pattern      : BFS + Indegree
+
+Approach     : Push all indegree 0 vertices into queue
+
+Time          : O(V + E)
+Space         : O(V)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+
+    vector<int> topoSort(vector<vector<int>>& adj){
+
+        int V = adj.size();
+
+        vector<int> indegree(V,0);
+
+        for(int i=0;i<V;i++)
+            for(int it:adj[i])
+                indegree[it]++;
+
+        queue<int> q;
+
+        for(int i=0;i<V;i++)
+            if(indegree[i]==0)
+                q.push(i);
+
+        vector<int> ans;
+
+        while(!q.empty()){
+
+            int node=q.front();
+            q.pop();
+
+            ans.push_back(node);
+
+            for(int it:adj[node]){
+
+                indegree[it]--;
+
+                if(indegree[it]==0)
+                    q.push(it);
+            }
+        }
+
+        return ans;
+    }
+};
+
+int main(){
+    return 0;
+}
