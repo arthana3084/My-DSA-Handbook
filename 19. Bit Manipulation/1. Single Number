@@ -1,0 +1,38 @@
+/*
+==================================================
+Problem      : Single Number
+Platform     : LeetCode 136
+
+Difficulty   : Easy
+
+Pattern      : Bit Manipulation (XOR)
+
+Approach     : XOR all elements
+
+Time          : O(n)
+Space         : O(1)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+
+        int ans = 0;
+
+        for(int x : nums)
+            ans ^= x;
+
+        return ans;
+    }
+};
+
+int main() {
+    return 0;
+}
