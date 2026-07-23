@@ -1,0 +1,77 @@
+/*
+==================================================
+Problem      : Closest Subsequence Sum
+Platform     : LeetCode 1755
+
+Difficulty   : Hard
+
+Pattern      : Meet in the Middle
+
+Approach     :
+Generate all subset sums of both halves.
+Sort one half and binary search for the
+closest complement.
+
+Time          : O(2^(N/2) log(2^(N/2)))
+Space         : O(2^(N/2))
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+
+    void generate(vector<int>& nums,int start,int end,
+                  long long sum,vector<long long>& ans){
+
+        if(start>end){
+            ans.push_back(sum);
+            return;
+        }
+
+        generate(nums,start+1,end,sum,ans);
+
+        generate(nums,start+1,end,sum+nums[start],ans);
+    }
+
+    int minAbsDifference(vector<int>& nums,int goal){
+
+        int n=nums.size();
+
+        vector<long long> left,right;
+
+        generate(nums,0,n/2-1,0,left);
+        generate(nums,n/2,n-1,0,right);
+
+        sort(right.begin(),right.end());
+
+        long long ans=LLONG_MAX;
+
+        for(long long x:left){
+
+            long long target=goal-x;
+
+            auto it=lower_bound(right.begin(),right.end(),target);
+
+            if(it!=right.end())
+                ans=min(ans,abs(x+*it-goal));
+
+            if(it!=right.begin()){
+
+                --it;
+                ans=min(ans,abs(x+*it-goal));
+            }
+        }
+
+        return ans;
+    }
+};
+
+int main(){
+    return 0;
+}
