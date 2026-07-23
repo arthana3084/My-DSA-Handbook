@@ -1,0 +1,61 @@
+/*
+==================================================
+Problem      : Number of Provinces
+Platform     : LeetCode 547
+
+Difficulty   : Medium
+
+Pattern      : Connected Components
+
+Approach     : DFS on Adjacency Matrix
+
+Time          : O(V²)
+Space         : O(V)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+
+    void dfs(int node, vector<vector<int>>& isConnected,
+             vector<bool>& vis){
+
+        vis[node] = true;
+
+        for(int i = 0; i < isConnected.size(); i++){
+
+            if(isConnected[node][i] && !vis[i])
+                dfs(i, isConnected, vis);
+        }
+    }
+
+    int findCircleNum(vector<vector<int>>& isConnected) {
+
+        int n = isConnected.size();
+
+        vector<bool> vis(n, false);
+
+        int provinces = 0;
+
+        for(int i = 0; i < n; i++){
+
+            if(!vis[i]){
+
+                provinces++;
+                dfs(i, isConnected, vis);
+            }
+        }
+
+        return provinces;
+    }
+};
+
+int main() {
+    return 0;
+}
