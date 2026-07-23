@@ -18,7 +18,7 @@ Think of it as my **virtual revision notebook**—a place where I keep the probl
 
 - Build strong problem-solving fundamentals
 - Master common interview patterns
-- Maintain clean and optimized C++ solutions
+- Maintain clean, well-documented C++ implementations
 - Create a structured revision resource for placements
 - Continuously improve through revision and practice
 
