@@ -1,0 +1,67 @@
+/*
+==================================================
+Problem      : Linked List Cycle II
+Platform     : LeetCode 142
+Difficulty   : Medium
+
+Pattern      : Floyd's Cycle Detection
+
+Time          : O(n)
+Space         : O(1)
+
+Key Idea
+---------
+After collision, move one pointer to head.
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+struct ListNode
+{
+    int val;
+    ListNode* next;
+
+    ListNode(int x)
+    {
+        val=x;
+        next=NULL;
+    }
+};
+
+ListNode* detectCycle(ListNode* head)
+{
+    ListNode *slow=head,*fast=head;
+
+    while(fast && fast->next)
+    {
+        slow=slow->next;
+        fast=fast->next->next;
+
+        if(slow==fast)
+        {
+            slow=head;
+
+            while(slow!=fast)
+            {
+                slow=slow->next;
+                fast=fast->next;
+            }
+
+            return slow;
+        }
+    }
+
+    return NULL;
+}
+
+int main()
+{
+    cout<<"Refer LeetCode for cycle creation.";
+
+    return 0;
+}
