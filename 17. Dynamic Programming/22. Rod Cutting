@@ -1,0 +1,119 @@
+/*
+==================================================
+Problem      : Rod Cutting
+Platform     : GeeksforGeeks
+
+Difficulty   : Medium
+
+Pattern      : Unbounded Knapsack DP
+
+Approach     : Memoization / Tabulation / Space Optimization
+
+Time          : O(N²)
+Space         : O(N²)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution{
+public:
+
+    //================ Memoization ================
+
+    int solve(int ind,int len,vector<int>& price,
+              vector<vector<int>>& dp){
+
+        if(ind==0)
+            return len*price[0];
+
+        if(dp[ind][len]!=-1)
+            return dp[ind][len];
+
+        int notTake=solve(ind-1,len,price,dp);
+
+        int take=INT_MIN;
+
+        int rodLength=ind+1;
+
+        if(rodLength<=len)
+            take=price[ind]+
+                 solve(ind,len-rodLength,price,dp);
+
+        return dp[ind][len]=max(take,notTake);
+    }
+
+    int cutRodMemo(vector<int>& price,int n){
+
+        vector<vector<int>> dp(n,vector<int>(n+1,-1));
+
+        return solve(n-1,n,price,dp);
+    }
+
+    //================ Tabulation ================
+
+    int cutRodTab(vector<int>& price,int n){
+
+        vector<vector<int>> dp(n,vector<int>(n+1,0));
+
+        for(int len=0;len<=n;len++)
+            dp[0][len]=len*price[0];
+
+        for(int ind=1;ind<n;ind++){
+
+            int rodLength=ind+1;
+
+            for(int len=0;len<=n;len++){
+
+                int notTake=dp[ind-1][len];
+
+                int take=INT_MIN;
+
+                if(rodLength<=len)
+                    take=price[ind]+
+                         dp[ind][len-rodLength];
+
+                dp[ind][len]=max(take,notTake);
+            }
+        }
+
+        return dp[n-1][n];
+    }
+
+    //============= Space Optimization =============
+
+    int cutRod(vector<int>& price,int n){
+
+        vector<int> prev(n+1,0);
+
+        for(int len=0;len<=n;len++)
+            prev[len]=len*price[0];
+
+        for(int ind=1;ind<n;ind++){
+
+            int rodLength=ind+1;
+
+            for(int len=0;len<=n;len++){
+
+                int notTake=prev[len];
+
+                int take=INT_MIN;
+
+                if(rodLength<=len)
+                    take=price[ind]+prev[len-rodLength];
+
+                prev[len]=max(take,notTake);
+            }
+        }
+
+        return prev[n];
+    }
+};
+
+int main(){
+    return 0;
+}
