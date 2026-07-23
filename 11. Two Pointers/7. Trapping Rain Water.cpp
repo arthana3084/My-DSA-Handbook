@@ -1,0 +1,60 @@
+/*
+==================================================
+Problem      : Trapping Rain Water
+Platform     : LeetCode 42
+
+Difficulty   : Hard
+
+Pattern      : Two Pointers
+
+Time          : O(n)
+Space         : O(1)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+public:
+
+    int trap(vector<int>& height)
+    {
+        int left=0,right=height.size()-1;
+        int leftMax=0,rightMax=0;
+        int water=0;
+
+        while(left<=right)
+        {
+            if(height[left]<=height[right])
+            {
+                if(height[left]>=leftMax)
+                    leftMax=height[left];
+                else
+                    water+=leftMax-height[left];
+
+                left++;
+            }
+            else
+            {
+                if(height[right]>=rightMax)
+                    rightMax=height[right];
+                else
+                    water+=rightMax-height[right];
+
+                right--;
+            }
+        }
+
+        return water;
+    }
+};
+
+int main()
+{
+    return 0;
+}
