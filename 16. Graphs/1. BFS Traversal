@@ -1,0 +1,60 @@
+/*
+==================================================
+Problem      : BFS Traversal
+Platform     : GeeksforGeeks
+
+Difficulty   : Easy
+
+Pattern      : Graph Traversal
+
+Approach     : Breadth First Search using Queue
+
+Time          : O(V + E)
+Space         : O(V)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+  public:
+    vector<int> bfs(vector<vector<int>> &adj) {
+
+        int V = adj.size();
+
+        vector<int> ans;
+        vector<bool> vis(V, false);
+
+        queue<int> q;
+
+        q.push(0);
+        vis[0] = true;
+
+        while(!q.empty()){
+
+            int node = q.front();
+            q.pop();
+
+            ans.push_back(node);
+
+            for(int it : adj[node]){
+
+                if(!vis[it]){
+
+                    vis[it] = true;
+                    q.push(it);
+                }
+            }
+        }
+
+        return ans;
+    }
+};
+
+int main() {
+    return 0;
+}
