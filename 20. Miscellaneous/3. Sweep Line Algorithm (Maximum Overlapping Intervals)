@@ -1,0 +1,69 @@
+/*
+==================================================
+Problem      : Maximum Overlapping Intervals
+Platform     : General DSA
+
+Difficulty   : Medium
+
+Pattern      : Sweep Line
+
+Approach     :
+Store +1 at every interval start and
+-1 immediately after every interval end.
+Traverse the events in sorted order and
+maintain the current overlap count.
+
+Time          : O(N log N)
+Space         : O(N)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution{
+public:
+
+    int maxOverlap(vector<pair<int,int>>& intervals){
+
+        map<int,int> events;
+
+        for(auto &it:intervals){
+
+            events[it.first]++;
+
+            events[it.second+1]--;
+        }
+
+        int curr=0;
+        int ans=0;
+
+        for(auto &it:events){
+
+            curr+=it.second;
+
+            ans=max(ans,curr);
+        }
+
+        return ans;
+    }
+};
+
+int main(){
+
+    Solution obj;
+
+    vector<pair<int,int>> intervals={
+        {1,5},
+        {2,6},
+        {4,8},
+        {7,9}
+    };
+
+    cout<<obj.maxOverlap(intervals);
+
+    return 0;
+}
