@@ -1,0 +1,138 @@
+/*
+==================================================
+Problem      : Minimum Coins
+Platform     : GeeksforGeeks
+
+Difficulty   : Medium
+
+Pattern      : Unbounded Knapsack DP
+
+Approach     : Memoization / Tabulation / Space Optimization
+
+Time          : O(N*Target)
+Space         : O(N*Target)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution{
+public:
+
+    //================ Memoization ================
+
+    int solve(int ind,int target,vector<int>& coins,
+              vector<vector<int>>& dp){
+
+        if(ind==0){
+
+            if(target%coins[0]==0)
+                return target/coins[0];
+
+            return 1e9;
+        }
+
+        if(dp[ind][target]!=-1)
+            return dp[ind][target];
+
+        int notTake=solve(ind-1,target,coins,dp);
+
+        int take=1e9;
+
+        if(coins[ind]<=target)
+            take=1+solve(ind,target-coins[ind],coins,dp);
+
+        return dp[ind][target]=min(take,notTake);
+    }
+
+    int coinChangeMemo(vector<int>& coins,int amount){
+
+        int n=coins.size();
+
+        vector<vector<int>> dp(n,vector<int>(amount+1,-1));
+
+        int ans=solve(n-1,amount,coins,dp);
+
+        return (ans>=1e9)?-1:ans;
+    }
+
+    //================ Tabulation ================
+
+    int coinChangeTab(vector<int>& coins,int amount){
+
+        int n=coins.size();
+
+        vector<vector<int>> dp(n,vector<int>(amount+1,0));
+
+        for(int t=0;t<=amount;t++){
+
+            if(t%coins[0]==0)
+                dp[0][t]=t/coins[0];
+            else
+                dp[0][t]=1e9;
+        }
+
+        for(int ind=1;ind<n;ind++){
+
+            for(int t=0;t<=amount;t++){
+
+                int notTake=dp[ind-1][t];
+
+                int take=1e9;
+
+                if(coins[ind]<=t)
+                    take=1+dp[ind][t-coins[ind]];
+
+                dp[ind][t]=min(take,notTake);
+            }
+        }
+
+        return (dp[n-1][amount]>=1e9)?-1:dp[n-1][amount];
+    }
+
+    //============= Space Optimization =============
+
+    int coinChange(vector<int>& coins,int amount){
+
+        int n=coins.size();
+
+        vector<int> prev(amount+1);
+
+        for(int t=0;t<=amount;t++){
+
+            if(t%coins[0]==0)
+                prev[t]=t/coins[0];
+            else
+                prev[t]=1e9;
+        }
+
+        for(int ind=1;ind<n;ind++){
+
+            vector<int> curr(amount+1);
+
+            for(int t=0;t<=amount;t++){
+
+                int notTake=prev[t];
+
+                int take=1e9;
+
+                if(coins[ind]<=t)
+                    take=1+curr[t-coins[ind]];
+
+                curr[t]=min(take,notTake);
+            }
+
+            prev=curr;
+        }
+
+        return (prev[amount]>=1e9)?-1:prev[amount];
+    }
+};
+
+int main(){
+    return 0;
+}
