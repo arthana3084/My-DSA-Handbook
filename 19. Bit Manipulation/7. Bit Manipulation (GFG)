@@ -1,0 +1,37 @@
+/*
+==================================================
+Problem      : Bit Manipulation
+Platform     : GeeksforGeeks
+
+Difficulty   : Easy
+
+Pattern      : Basic Bit Operations
+
+Approach     : Check, Set and Clear ith Bit
+
+Time          : O(1)
+Space         : O(1)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    void bitManipulation(int num, int i) {
+
+        int bit = (num >> (i - 1)) & 1;
+        int setBit = num | (1 << (i - 1));
+        int clearBit = num & (~(1 << (i - 1)));
+
+        cout << bit << " " << setBit << " " << clearBit;
+    }
+};
+
+int main() {
+    return 0;
+}
