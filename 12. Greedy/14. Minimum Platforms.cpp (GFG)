@@ -1,0 +1,56 @@
+/*
+==================================================
+Problem      : Minimum Platforms
+Platform     : GFG
+
+Difficulty   : Medium
+
+Pattern      : Greedy + Sorting
+
+Time          : O(n log n)
+Space         : O(1)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+public:
+
+    int findPlatform(int arr[], int dep[], int n)
+    {
+        sort(arr, arr + n);
+        sort(dep, dep + n);
+
+        int platforms = 1, ans = 1;
+        int i = 1, j = 0;
+
+        while(i < n && j < n)
+        {
+            if(arr[i] <= dep[j])
+            {
+                platforms++;
+                i++;
+            }
+            else
+            {
+                platforms--;
+                j++;
+            }
+
+            ans = max(ans, platforms);
+        }
+
+        return ans;
+    }
+};
+
+int main()
+{
+    return 0;
+}
