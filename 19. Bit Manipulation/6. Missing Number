@@ -1,0 +1,38 @@
+/*
+==================================================
+Problem      : Missing Number
+Platform     : LeetCode 268
+
+Difficulty   : Easy
+
+Pattern      : Bit Manipulation (XOR)
+
+Approach     : XOR Index and Elements
+
+Time          : O(n)
+Space         : O(1)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+
+        int ans = nums.size();
+
+        for(int i = 0; i < nums.size(); i++)
+            ans ^= i ^ nums[i];
+
+        return ans;
+    }
+};
+
+int main() {
+    return 0;
+}
