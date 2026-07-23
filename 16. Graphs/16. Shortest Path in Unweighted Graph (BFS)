@@ -1,0 +1,57 @@
+/*
+==================================================
+Problem      : Shortest Path in Unweighted Graph
+Platform     : GeeksforGeeks
+
+Difficulty   : Medium
+
+Pattern      : BFS
+
+Approach     : Breadth First Search
+
+Time          : O(V + E)
+Space         : O(V)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+
+    vector<int> shortestPath(vector<vector<int>>& adj, int src){
+
+        int V = adj.size();
+
+        vector<int> dist(V, INT_MAX);
+        queue<int> q;
+
+        dist[src] = 0;
+        q.push(src);
+
+        while(!q.empty()){
+
+            int node = q.front();
+            q.pop();
+
+            for(int it : adj[node]){
+
+                if(dist[node] + 1 < dist[it]){
+
+                    dist[it] = dist[node] + 1;
+                    q.push(it);
+                }
+            }
+        }
+
+        return dist;
+    }
+};
+
+int main(){
+    return 0;
+}
