@@ -1,0 +1,82 @@
+/*
+==================================================
+Problem      : Kth Ancestor of a Tree Node
+Platform     : LeetCode 1483
+
+Difficulty   : Hard
+
+Pattern      : Binary Lifting
+
+Approach     :
+Precompute 2^i-th ancestor of every node.
+Answer each query by jumping through the
+binary representation of k.
+
+Preprocessing : O(N log N)
+Query         : O(log N)
+
+Space         : O(N log N)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class TreeAncestor {
+
+    vector<vector<int>> up;
+    int LOG;
+
+public:
+
+    TreeAncestor(int n, vector<int>& parent){
+
+        LOG=20;
+
+        up.assign(n,vector<int>(LOG,-1));
+
+        for(int i=0;i<n;i++)
+            up[i][0]=parent[i];
+
+        for(int j=1;j<LOG;j++){
+
+            for(int i=0;i<n;i++){
+
+                if(up[i][j-1]!=-1)
+                    up[i][j]=up[up[i][j-1]][j-1];
+            }
+        }
+    }
+
+    int getKthAncestor(int node,int k){
+
+        for(int i=0;i<LOG;i++){
+
+            if(k&(1<<i)){
+
+                node=up[node][i];
+
+                if(node==-1)
+                    return -1;
+            }
+        }
+
+        return node;
+    }
+};
+
+int main(){
+
+    int n=7;
+
+    vector<int> parent={-1,0,0,1,1,2,2};
+
+    TreeAncestor obj(n,parent);
+
+    cout<<obj.getKthAncestor(5,2);
+
+    return 0;
+}
