@@ -1,0 +1,51 @@
+/*
+==================================================
+Problem      : Power Set
+Platform     : GeeksforGeeks
+
+Difficulty   : Easy
+
+Pattern      : Bitmasking
+
+Approach     : Generate every subset using bitmask
+
+Time          : O(n * 2^n)
+Space         : O(n * 2^n)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    vector<string> AllPossibleStrings(string s) {
+
+        int n = s.length();
+        vector<string> ans;
+
+        for(int mask = 1; mask < (1 << n); mask++){
+
+            string temp = "";
+
+            for(int i = 0; i < n; i++){
+
+                if(mask & (1 << i))
+                    temp += s[i];
+            }
+
+            ans.push_back(temp);
+        }
+
+        sort(ans.begin(), ans.end());
+
+        return ans;
+    }
+};
+
+int main() {
+    return 0;
+}
