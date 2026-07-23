@@ -1,0 +1,54 @@
+/*
+==================================================
+Problem      : DFS Traversal
+Platform     : GeeksforGeeks
+
+Difficulty   : Easy
+
+Pattern      : Graph Traversal
+
+Approach     : Recursive Depth First Search
+
+Time          : O(V + E)
+Space         : O(V)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+
+    void dfsHelper(int node, vector<vector<int>>& adj,
+                   vector<bool>& vis, vector<int>& ans){
+
+        vis[node] = true;
+        ans.push_back(node);
+
+        for(int it : adj[node]){
+
+            if(!vis[it])
+                dfsHelper(it, adj, vis, ans);
+        }
+    }
+
+    vector<int> dfs(vector<vector<int>>& adj) {
+
+        int V = adj.size();
+
+        vector<int> ans;
+        vector<bool> vis(V, false);
+
+        dfsHelper(0, adj, vis, ans);
+
+        return ans;
+    }
+};
+
+int main() {
+    return 0;
+}
