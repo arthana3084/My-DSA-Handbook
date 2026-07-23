@@ -1,0 +1,41 @@
+/*
+==================================================
+Problem      : Minimum Bit Flips to Convert Number
+Platform     : LeetCode 2220
+
+Difficulty   : Easy
+
+Pattern      : Bit Manipulation (XOR)
+
+Approach     : XOR the numbers and count set bits
+
+Time          : O(logN)
+Space         : O(1)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int minBitFlips(int start, int goal) {
+
+        int x = start ^ goal;
+        int cnt = 0;
+
+        while(x){
+            cnt++;
+            x &= (x - 1);
+        }
+
+        return cnt;
+    }
+};
+
+int main() {
+    return 0;
+}
