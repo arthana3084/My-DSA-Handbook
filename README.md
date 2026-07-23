@@ -88,9 +88,9 @@ Each topic contains only the most important interview questions that represent f
 
 ## 🌟 Note
 
-This repository is intentionally **curated rather than comprehensive**.
+This repository is not a collection of every problem I've solved. Instead, it is my personal revision and learning handbook containing carefully curated problems that I revisit to strengthen core concepts, recognize common interview patterns, and prepare for coding interviews.
 
-My complete submission history is available in my LeetCode, NeetCode, and GeeksforGeeks repositories. This handbook contains only the problems I consider most important for revision and interview preparation.
+I regularly practice and solve problems across Striver's SDE Sheet,NeetCode150,LeetCode and GeeksforGeeks. The implementations included here represent the problems I consider most valuable for revision and long-term learning, rather than my complete problem-solving history.
 
 ---
 
