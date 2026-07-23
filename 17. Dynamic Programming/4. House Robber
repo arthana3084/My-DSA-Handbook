@@ -1,0 +1,44 @@
+/*
+==================================================
+Problem      : House Robber
+Platform     : LeetCode 198
+
+Difficulty   : Medium
+
+Pattern      : 1D Dynamic Programming (Pick / Not Pick)
+
+Approaches:
+1. Memoization
+2. Tabulation
+3. Space Optimization ⭐
+
+Time          : O(n)
+Space         : O(n) / O(1)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+public:
+
+    //=============== Memoization ===============//
+
+    int solve(int idx, vector<int>& nums, vector<int>& dp)
+    {
+        if(idx == 0)
+            return nums[0];
+
+        if(idx < 0)
+            return 0;
+
+        if(dp[idx] != -1)
+            return dp[idx];
+
+        int pick = nums[idx] + solve(idx - 2, nums, dp);
+        int notPick = solve(idx - 1,
