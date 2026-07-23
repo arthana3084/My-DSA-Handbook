@@ -1,0 +1,68 @@
+/*
+==================================================
+Problem      : Prim's Algorithm
+Platform     : GeeksforGeeks
+
+Difficulty   : Medium
+
+Pattern      : Minimum Spanning Tree
+
+Approach     : Greedy + Priority Queue
+
+Time          : O(E logV)
+Space         : O(V)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐⭐
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+
+    int spanningTree(int V, vector<vector<int>> adj[]){
+
+        priority_queue<pair<int,int>,
+                       vector<pair<int,int>>,
+                       greater<pair<int,int>>> pq;
+
+        vector<bool> vis(V,false);
+
+        pq.push({0,0});
+
+        int sum=0;
+
+        while(!pq.empty()){
+
+            auto it=pq.top();
+            pq.pop();
+
+            int wt=it.first;
+            int node=it.second;
+
+            if(vis[node])
+                continue;
+
+            vis[node]=true;
+            sum+=wt;
+
+            for(auto edge:adj[node]){
+
+                int adjNode=edge[0];
+                int edgeWt=edge[1];
+
+                if(!vis[adjNode])
+                    pq.push({edgeWt,adjNode});
+            }
+        }
+
+        return sum;
+    }
+};
+
+int main(){
+    return 0;
+}
