@@ -1,0 +1,92 @@
+/*
+==================================================
+Problem      : Huffman Encoding
+Platform     : GFG
+
+Difficulty   : Medium
+
+Pattern      : Greedy + Min Heap
+
+Time          : O(n log n)
+Space         : O(n)
+
+Status              : ⭐ Must Revise
+Frequently Asked    : ⭐⭐⭐⭐☆
+==================================================
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+public:
+
+    vector<string> huffmanCodes(string S,
+                                vector<int> f,
+                                int N)
+    {
+        struct Node
+        {
+            int freq;
+            Node *left, *right;
+
+            Node(int x)
+            {
+                freq = x;
+                left = right = NULL;
+            }
+        };
+
+        struct cmp
+        {
+            bool operator()(Node* a, Node* b)
+            {
+                return a->freq > b->freq;
+            }
+        };
+
+        priority_queue<Node*, vector<Node*>, cmp> pq;
+
+        for(int x : f)
+            pq.push(new Node(x));
+
+        while(pq.size() > 1)
+        {
+            Node *left = pq.top(); pq.pop();
+            Node *right = pq.top(); pq.pop();
+
+            Node *parent = new Node(left->freq + right->freq);
+            parent->left = left;
+            parent->right = right;
+
+            pq.push(parent);
+        }
+
+        vector<string> ans;
+
+        function<void(Node*, string)> dfs = [&](Node* root, string code)
+        {
+            if(!root)
+                return;
+
+            if(!root->left && !root->right)
+            {
+                ans.push_back(code);
+                return;
+            }
+
+            dfs(root->left, code + "0");
+            dfs(root->right, code + "1");
+        };
+
+        dfs(pq.top(), "");
+
+        return ans;
+    }
+};
+
+int main()
+{
+    return 0;
+}
